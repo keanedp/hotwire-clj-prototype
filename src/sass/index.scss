@@ -1,0 +1,16 @@
+@charset "utf-8";
+@import "~bulma/bulma";
+
+.navbar-brand {
+  span.brand {
+    color: #00d1b2;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+}
+
+#messages {
+  p.message-paragraph {
+    white-space: pre-wrap;
+  }
+}
