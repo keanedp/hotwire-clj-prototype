@@ -107,9 +107,10 @@
 
 (defn created
   [req message]
-  (as-> (layout/wrap req {} [:turbo-stream {:action "replace" :target "new_message"}
-                             [:template
-                              (new-message-button)]]
+  (as-> (layout/wrap req {}
+                     [:turbo-stream {:action "replace" :target "new_message"}
+                      [:template
+                       (new-message-button)]]
                      [:turbo-stream {:action "prepend" :target "messages"}
                       [:template
                        (message-display message)]]) response

@@ -5,8 +5,8 @@
             [ring.middleware.anti-forgery :as af]
             [hotwire-clj.web.turbo :as turbo]))
 
-(defmulti wrap (fn [req {:keys [layout-name]} & body-content]
-                 (if (turbo/turbo-request? req)
+(defmulti wrap (fn [req {:keys [layout-name]} & _body-content]
+                 (if (turbo/turbo-frame-request? req)
                    :partial
                    layout-name)))
 

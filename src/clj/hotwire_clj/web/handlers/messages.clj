@@ -28,7 +28,7 @@
                      (log/error "Exception when updating message: " (.getMessage e))
                      false))]
     (if success?
-      (if (turbo/turbo-request? req)
+      (if (turbo/turbo-stream-request? req)
         (message-views/show req (if success? updated-message db-message))
         (-> (r/redirect "/messages" 303)
             (assoc :flash "Updated message!")))
@@ -44,7 +44,7 @@
         created-message (->> {:message message}
                              (db/insert! Message))]
     (if created-message
-      (if (turbo/turbo-request? req)
+      (if (turbo/turbo-stream-request? req)
         (message-views/created req created-message)
         (-> (r/redirect "/messages" 303)
             (assoc :flash "Created message!")))
@@ -55,7 +55,7 @@
   [req id]
   (println "content types: " (get-in req [:headers "accept"]))
   (let [deleted? (db/update! Message id :is-deleted 1)]
-    (if (turbo/turbo-request? req)
+    (if (turbo/turbo-stream-request? req)
       (message-views/deleted req id)
       (-> (r/redirect "/messages" 303)
           (assoc :flash "Deleted message!")))))
